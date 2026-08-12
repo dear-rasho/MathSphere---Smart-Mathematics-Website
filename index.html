@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description"
+        content="MathSphere — offline-first mathematics platform for classes 9–12 with calculator, board papers, official syllabus, notes, AI solver, practice and board-style papers.">
+    <title>MathSphere — Smart Mathematics Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script>window.MathJax = {tex: {inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]]}, options: {skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]}};</script>
+    <script src="vendor/mathjax/tex-chtml.js"></script>
+</head>
+
+<body>
+    <header class="app-header">
+        <a class="brand" href="#home"><span class="brand-mark">∑</span><span>MathSphere</span></a>
+        <button id="menuButton" class="menu-button" type="button">☰</button>
+        <nav id="mainNavigation" class="main-navigation">
+            <a href="#home">Home</a><a href="#calculator">Calculator</a><a href="#papers">Papers</a><a
+                href="#syllabus">Learn</a><a href="#ai">AI</a><a href="#practice">Tests</a>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="page-section hero-section">
+            <div class="hero-copy"><span class="eyebrow">MATHEMATICS • CLASSES 9–12</span>
+                <h1>One complete mathematics study platform.</h1>
+                <p>Calculator, board resources, syllabus, topic notes, AI tutoring, board-style practice papers, guess
+                    papers and large offline question banks — in one mobile-first app.</p>
+                <div class="hero-actions"><a class="primary-button" href="#syllabus">Start learning</a><a
+                        class="outline-button" href="#practice">Take a test</a></div>
+            </div>
+            <div class="search-panel"><label for="globalSearch">Search MathSphere</label>
+                <div class="search-box"><input id="globalSearch" type="search"
+                        placeholder="Search chapters, formulas, papers…"><button id="searchButton"
+                        type="button">Search</button></div>
+            </div>
+            <div class="feature-grid">
+                <a class="feature-link" href="#calculator"><span>🧮</span><strong>Scientific
+                        Calculator</strong><small>Basic, scientific and advanced operations.</small></a>
+                <a class="feature-link" href="#papers"><span>📄</span><strong>Board Papers</strong><small>Local FBISE
+                        files plus official archives and generated offline papers.</small></a>
+                <a class="feature-link" href="#syllabus"><span>📚</span><strong>Syllabus & Notes</strong><small>Board →
+                        class → topic → detailed study notes.</small></a>
+                <a class="feature-link" href="#ai"><span>🤖</span><strong>AI Mathematics</strong><small>Gemini-powered
+                        solver and selected-paper generation.</small></a>
+                <a class="feature-link" href="#guess"><span>⭐</span><strong>Guess Papers</strong><small>Original
+                        app-authored revision papers, not official papers.</small></a>
+                <a class="feature-link" href="#practice"><span>✓</span><strong>Full Book Practice</strong><small>Large
+                        offline MCQ, short and long question banks.</small></a><a class="feature-link"
+                    href="#important"><span>🎯</span><strong>Important Questions</strong><small>Focused revision
+                        questions by board and class.</small></a><a class="feature-link"
+                    href="#advanced"><span>⚙️</span><strong>Math Tools</strong><small>Useful offline mathematics
+                        utilities.</small></a>
+            </div>
+        </section>
+
+        <section id="calculator" class="page-section calculator-section" aria-hidden="true">
+            <div class="section-heading"><span class="eyebrow">TOOLS</span>
+                <h2>Scientific Calculator</h2>
+                <p>Touch-friendly calculator with basic, scientific and advanced modes.</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-display">
+                    <div id="calculatorHistory" class="calculator-history"></div><input id="calculatorDisplay"
+                        aria-label="Calculator display" readonly>
+                </div>
+                <div class="calculator-modes">
+                    <button type="button" data-mode="basic" class="active">Basic</button>
+                    <button type="button" data-mode="scientific">Scientific</button>
+                    <button type="button" data-mode="advanced">Advanced</button>
+                </div>
+                <div class="calculator-keypad">
+                    <button type="button" data-action="clear">AC</button><button type="button"
+                        data-action="delete">DEL</button><button type="button" data-value="%">%</button><button
+                        type="button" data-value="/">÷</button>
+                    <button type="button" data-value="7">7</button><button type="button"
+                        data-value="8">8</button><button type="button" data-value="9">9</button><button type="button"
+                        data-value="*">×</button>
+                    <button type="button" data-value="4">4</button><button type="button"
+                        data-value="5">5</button><button type="button" data-value="6">6</button><button type="button"
+                        data-value="-">−</button>
+                    <button type="button" data-value="1">1</button><button type="button"
+                        data-value="2">2</button><button type="button" data-value="3">3</button><button type="button"
+                        data-value="+">+</button>
+                    <button type="button" data-value="0">0</button><button type="button"
+                        data-value=".">.</button><button type="button" data-value="(">(</button><button type="button"
+                        data-value=")">)</button><button type="button" data-action="calculate"
+                        class="equals-button">=</button>
+                </div>
+                <div class="scientific-functions" data-panel="scientific">
+                    <button type="button" data-function="sin">sin</button><button type="button"
+                        data-function="cos">cos</button><button type="button" data-function="tan">tan</button><button
+                        type="button" data-function="log">log</button>
+                    <button type="button" data-function="ln">ln</button><button type="button"
+                        data-function="sqrt">√</button><button type="button" data-function="square">x²</button><button
+                        type="button" data-function="power">xʸ</button>
+                    <button type="button" data-function="factorial">x!</button><button type="button"
+                        data-function="pi">π</button><button type="button" data-function="e">e</button><button
+                        type="button" data-function="ans">Ans</button>
+                </div>
+                <div class="calculator-history-controls"><button id="toggleCalculatorHistory" type="button"
+                        class="outline-button">History</button><button id="clearCalculatorHistory" type="button"
+                        class="outline-button">Clear history</button></div>
+                <div id="calculatorHistoryPanel" class="calculator-history-panel" hidden></div>
+            </div>
+        </section>
+
+        <section id="papers" class="page-section">
+            <div class="section-heading"><span class="eyebrow">PAPER CENTRE</span>
+                <h2>Board Mathematics Papers</h2>
+                <p>Original FBISE files remain local. Official CBSE papers are linked to CBSE. When a paper is not
+                    stored locally, MathSphere provides an app-authored board-style paper for offline practice.</p>
+            </div>
+            <div class="filter-row"><label>Board<select id="paperBoard">
+                        <option value="">Select board</option>
+                        <option value="fbise">FBISE</option>
+                        <option value="cbse">CBSE</option>
+                    </select></label><label>Class<select id="paperClass">
+                        <option value="">Select class</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select></label><label>Year<select id="paperYear">
+                        <option value="">Select year</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                    </select></label></div>
+            <div id="paperContent" class="content-stack"></div>
+        </section>
+
+        <section id="syllabus" class="page-section">
+            <div class="section-heading"><span class="eyebrow">CURRICULUM</span>
+                <h2>Syllabus & Topic Notes</h2>
+                <p>Curriculum scope is based on official board sources. Topic notes are original MathSphere study notes
+                    designed for offline use.</p>
+            </div>
+            <div class="filter-row"><label>Board<select id="syllabusBoard">
+                        <option value="">Select board</option>
+                        <option value="fbise">FBISE</option>
+                        <option value="cbse">CBSE</option>
+                    </select></label><label>Class<select id="syllabusClass">
+                        <option value="">Select class</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select></label></div>
+            <div id="syllabusContent" class="content-stack"></div>
+        </section>
+
+        <section id="ai" class="page-section">
+            <div class="section-heading"><span class="eyebrow">AI LEARNING</span>
+                <h2>AI Mathematics Workspace</h2>
+                <p>Gemini integration restored. Put your Gemini key in <code>js/config.js</code>. For production Play
+                    Store release, move the key to a secure backend.</p>
+            </div>
+            <div class="two-column">
+                <article class="panel">
+                    <h3>Step-by-step AI Solver</h3><textarea id="aiQuestion" rows="7"
+                        placeholder="Example: Solve 2x + 5 = 17 and explain every step."></textarea><button
+                        id="solveWithAI" class="primary-button" type="button">Solve with AI</button>
+                    <div id="aiSolution" class="answer-panel">
+                        <div class="empty-state">Enter a mathematics question.</div>
+                    </div>
+                </article>
+                <article class="panel">
+                    <h3>AI Paper Generator</h3>
+                    <form id="aiPaperForm">
+                        <div class="form-grid"><label>Board<select id="aiPaperBoard">
+                                    <option value="fbise">FBISE</option>
+                                    <option value="cbse">CBSE</option>
+                                </select></label><label>Class<select id="aiPaperClass">
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select></label><label>Year<select id="aiPaperYear">
+                                    <option>2025</option>
+                                    <option>2024</option>
+                                    <option>2023</option>
+                                    <option>2022</option>
+                                    <option>2021</option>
+                                </select></label><label>Paper pattern<select id="aiPaperCount">
+                                    <option value="board">Use board pattern</option>
+                                </select></label></div><button class="primary-button" type="submit">Generate
+                            paper</button>
+                    </form>
+                    <div id="aiPaperResult" class="answer-panel">
+                        <div class="empty-state">Select board, class and year.</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="guess" class="page-section">
+            <div class="section-heading"><span class="eyebrow">EXAM PREP</span>
+                <h2>Guess Papers</h2>
+                <p>App-authored prediction practice. Never presented as official board material.</p>
+            </div>
+            <div class="filter-row"><label>Board<select id="guessBoard">
+                        <option value="">Select board</option>
+                        <option value="fbise">FBISE</option>
+                        <option value="cbse">CBSE</option>
+                    </select></label><label>Class<select id="guessClass">
+                        <option value="">Select class</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select></label></div>
+            <div id="guessContent" class="content-stack"></div>
+        </section>
+
+        <section id="practice" class="page-section">
+            <div class="section-heading"><span class="eyebrow">OFFLINE QUESTION BANK</span>
+                <h2>Full Book Practice</h2>
+                <p>Choose any test size available in the selected question bank. The full bank remains available offline
+                    and the result appears directly below the submitted test.</p>
+            </div>
+            <div class="panel">
+                <div class="filter-row"><label>Board<select id="practiceBoard">
+                            <option value="">Select board</option>
+                            <option value="fbise">FBISE</option>
+                            <option value="cbse">CBSE</option>
+                        </select></label><label>Class<select id="practiceClass">
+                            <option value="">Select class</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select></label><label>Type<select id="practiceType">
+                            <option value="mcq">MCQs</option>
+                            <option value="short">Short Questions</option>
+                            <option value="long">Long Questions</option>
+                        </select></label><label>Questions<select id="practiceCount">
+                            <option>20</option>
+                            <option>30</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select></label><button id="startPractice" class="primary-button" type="button">Start
+                        test</button></div>
+                <div id="practiceTest" class="test-stack"></div>
+            </div>
+        </section>
+
+        <section id="important" class="page-section">
+            <div class="section-heading"><span class="eyebrow">EXAM PREP</span>
+                <h2>Important Questions</h2>
+                <p>High-priority offline revision questions selected from the board/class question bank.</p>
+            </div>
+            <div class="filter-row"><label>Board<select id="importantBoard">
+                        <option value="">Select board</option>
+                        <option value="fbise">FBISE</option>
+                        <option value="cbse">CBSE</option>
+                    </select></label><label>Class<select id="importantClass">
+                        <option value="">Select class</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select></label></div>
+            <div id="importantContent" class="question-grid"></div>
+        </section>
+
+        <section id="advanced" class="page-section">
+            <div class="section-heading"><span class="eyebrow">TOOLS</span>
+                <h2>Math Tools</h2>
+                <p>Quick offline utilities for common school mathematics calculations.</p>
+            </div>
+            <div class="tool-grid"><button data-tool="percentage">Percentage</button><button
+                    data-tool="average">Average</button><button data-tool="quadratic">Quadratic Formula</button><button
+                    data-tool="pythagoras">Pythagoras</button><button data-tool="simple-interest">Simple
+                    Interest</button><button data-tool="compound-interest">Compound Interest</button></div>
+        </section>
+
+        <section id="formulas" class="page-section">
+            <div class="section-heading"><span class="eyebrow">REFERENCE</span>
+                <h2>Formula Library</h2>
+                <p>Core formulas for quick offline revision.</p>
+            </div><input id="formulaSearch" class="full-input" type="search" placeholder="Search a formula or topic…">
+            <div id="formulaContainer" class="formula-grid"></div>
+        </section>
+    </main>
+    <footer class="app-footer"><strong>MathSphere</strong><span>Offline-first mathematics platform • Classes 9–12</span>
+    </footer>
+    <nav class="mobile-nav"><a href="#home">⌂<small>Home</small></a><a href="#calculator">∑<small>Calc</small></a><a
+            href="#papers">▤<small>Papers</small></a><a href="#syllabus">📚<small>Learn</small></a><a
+            href="#practice">✓<small>Test</small></a></nav>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/curriculum.js"></script>
+    <script src="js/fbise-papers-data.js"></script>
+    <script src="js/past-papers.js"></script>
+    <script src="js/paper-solver.js"></script>
+    <script src="js/ai-solver.js"></script>
+    <script src="js/ai-paper-generator.js"></script>
+    <script src="js/practice-test.js"></script>
+    <script src="js/guess-papers.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/important-questions.js"></script>
+    <script src="js/advanced-tools.js"></script>
+</body>
+
+</html>

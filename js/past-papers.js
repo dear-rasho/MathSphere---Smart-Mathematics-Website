@@ -1,0 +1,28 @@
+(function(){
+"use strict";
+const $=MathSphere.$;let generated=null,bank=null;
+const official={fbise:"https://www.fbise.edu.pk/",cbse:"https://www.cbse.gov.in/cbsenew/question-paper.html"};
+Promise.all([fetch("data/generated-papers.json").then(r=>r.json()),fetch("data/question-banks.json").then(r=>r.json())]).then(([g,b])=>{generated=g;bank=b;render()}).catch(()=>render());
+function qHtml(q,i){return typeof q==='object'?`<article class="paper-question mcq-question"><div class="question-number">${i+1}</div><div class="question-body"><p class="question-text">${MathSphere.escape(q.q||q.question||'')}</p><div class="mcq-options">${(q.o||q.options||[]).map((z,j)=>`<div class="mcq-option"><span class="option-letter">${String.fromCharCode(65+j)}</span><span>${MathSphere.escape(z)}</span></div>`).join('')}</div></div></article>`:`<article class="paper-question normal-question"><div class="question-number">${i+1}</div><div class="question-body"><p class="question-text">${MathSphere.escape(q)}</p></div></article>`}
+function generatedCBSE(p,c,y){
+ const src=bank?.cbse?.[c];const mcqs=(p?.questions||[]).slice(0,20);const shorts=(src?.short||[]).slice(0,11);const longs=(src?.long||[]).slice(0,4);const cases=(src?.long||[]).slice(4,7);
+ return `<article class="generated-paper"><span class="unofficial-badge">APP-AUTHORED • OFFLINE • NOT OFFICIAL</span><h3>CBSE Class ${c} Mathematics — Board-style Practice Paper ${y}</h3><p class="muted">A complete offline practice paper generated from the CBSE class question bank. It is not an official CBSE paper.</p><div class="paper-actions"><button type="button" class="primary-button solve-cbse-paper">Solve this paper with AI</button></div><section class="paper-section"><div class="paper-section-heading"><h4>SECTION A — MCQs</h4><span>${mcqs.length} Questions</span></div>${mcqs.map(qHtml).join('')}</section><section class="paper-section"><div class="paper-section-heading"><h4>SECTION B — Short Questions</h4><span>${shorts.length} Questions</span></div>${shorts.map(qHtml).join('')}</section><section class="paper-section"><div class="paper-section-heading"><h4>SECTION C — Long Questions</h4><span>${longs.length} Questions</span></div>${longs.map(qHtml).join('')}</section><section class="paper-section"><div class="paper-section-heading"><h4>SECTION E — Case Study</h4><span>${cases.length} Questions</span></div>${cases.map(qHtml).join('')}</section></article>`;
+}
+function render(){
+ const b=$("#paperBoard")?.value,c=$("#paperClass")?.value,y=$("#paperYear")?.value,o=$("#paperContent");if(!o)return;if(!b||!c||!y){o.innerHTML='<div class="empty-state">Select board, class and year to view papers.</div>';return}
+ let html=`<div class="paper-toolbar"><div><strong>${b.toUpperCase()} • Class ${c} • ${y}</strong><small>Offline papers and board resources.</small></div><a class="outline-button" target="_blank" rel="noopener" href="${official[b]}">Open official archive</a></div>`;
+ if(b==='fbise'){
+  const p=window.FBISE_PAPER_DATA?.[c]?.[y];
+  if(p?.available){html+=`<article class="paper-card"><div class="paper-card-head"><div><span class="badge">FBISE PAPER DATA</span><h3>${MathSphere.escape(p.title)}</h3><p class="muted">${MathSphere.escape(p.paperType||'Mathematics')} • Total Marks: ${MathSphere.escape(p.totalMarks||'')}</p></div></div><div class="paper-actions"><button type="button" class="primary-button solve-past-paper" data-paper="${MathSphere.escape(c)}|${MathSphere.escape(y)}">Solve this paper with AI</button></div>${Object.entries(p.sections||{}).map(([k,s])=>`<section class="paper-section"><div class="paper-section-heading"><h4>${MathSphere.escape(s.title||k)}</h4><span>${MathSphere.escape(String(s.marks||''))} marks</span></div>${s.instruction?`<p class="muted">${MathSphere.escape(s.instruction)}</p>`:''}<div>${(s.questions||[]).map(qHtml).join('')}</div></section>`).join('')}</article>`}
+  else html+=`<div class="empty-state"><h3>${MathSphere.escape(p?.title||'Paper unavailable')}</h3><p>${MathSphere.escape(p?.message||'No local paper data for this selection.')}</p></div>`;
+  const gp=generated?.fbise?.[c]?.[y]; if(gp) html+=`<article class="generated-paper"><span class="unofficial-badge">APP-AUTHORED PRACTICE • NOT OFFICIAL</span><h3>${MathSphere.escape(gp.title)}</h3><section class="paper-section"><h4>Section A — MCQs</h4>${gp.questions.map(qHtml).join('')}</section></article>`;
+ } else {
+  if(y==='2021') html+=`<div class="empty-state"><h3>CBSE 2021</h3><p>There was no regular Class X/XII board examination in 2021. MathSphere therefore does not label any generated material as an official paper.</p></div>`;
+  const gp=generated?.cbse?.[c]?.[y]; if(gp) html+=generatedCBSE(gp,c,y); else html+=`<div class="empty-state">No generated offline paper is available for this selection.</div>`;
+ }
+ o.innerHTML=html;
+ o.querySelector('.solve-past-paper')?.addEventListener('click',()=>window.MathSpherePaperSolver?.solve(p));
+ if(b==='cbse'){ const gp=generated?.cbse?.[c]?.[y]; if(gp){ const src=bank?.cbse?.[c]||{}; const paper={title:`CBSE Class ${c} Mathematics — Board-style Practice Paper ${y}`,sections:{A:{title:'SECTION A — MCQs',questions:(gp.questions||[]).slice(0,20)},B:{title:'SECTION B — Short Questions',questions:(src.short||[]).slice(0,11)},C:{title:'SECTION C — Long Questions',questions:(src.long||[]).slice(0,4)},E:{title:'SECTION E — Case Study',questions:(src.long||[]).slice(4,7)}}}; o.querySelector('.solve-cbse-paper')?.addEventListener('click',()=>window.MathSpherePaperSolver?.solve(paper)); }}
+}
+$("#paperBoard")?.addEventListener("change",render);$("#paperClass")?.addEventListener("change",render);$("#paperYear")?.addEventListener("change",render);
+})();
